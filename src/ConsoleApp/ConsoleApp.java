@@ -13,16 +13,15 @@ public class ConsoleApp {
                     System.out.println("\n------------------------------------------------------------------");
                     System.out.println("---------------------- CONSOLE APPLICATION -----------------------"); 
                     System.out.println("------------------------------------------------------------------");
+                    System.out.println("");
                     System.out.println("\t1. Smart City Route Planner"); 
                     System.out.println("\t2. Data Sorter – Sorting Algorithm Comparison Tool"); 
                     System.out.println("\t3. Algorithm Performance Analyzer (Time Complexity)"); 
                     System.out.println("\t4. Exit"); 
-                    System.out.println("------------------------------------------------------------------");
-                    System.out.print("Choose a module: "); 
+                    System.out.println("");
+                    System.out.print("\tChoose a module: "); 
                     int choice = sc.nextInt();
                     sc.nextLine();
-                    System.out.println("------------------------------------------------------------------");
-                    System.out.println("");
                     
                     switch (choice) { 
                         case 1: 
@@ -35,15 +34,17 @@ public class ConsoleApp {
                             new Module3Manager();
                             break; 
                         case 4: 
-                            System.out.println("Exiting application. Goodbye!"); 
+                            System.out.println("\tExiting application. Goodbye!"); 
                             return; 
                         default: 
-                            System.out.println("Invalid choice. Please try again."); 
+                            System.out.println("\tInvalid choice. Please try again."); 
                     } 
                 }
                 
             } catch (Exception e) {
-                System.out.println("Invalid user input");
+                System.out.println("\tInvalid user input");
+                System.out.println(e.getLocalizedMessage());
+                System.out.println(e.getMessage());
             }   
         }
     }
