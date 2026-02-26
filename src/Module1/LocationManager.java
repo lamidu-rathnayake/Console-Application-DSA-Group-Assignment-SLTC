@@ -11,38 +11,21 @@ public class LocationManager {
     public static HashMap<String, List<Road>> adjacencyList = new HashMap<>();
     public static LocationTree locationTree = new LocationTree();
 
-    public LocationManager(String[] locations, Road[][] roads) {
-        addLocation(locations, roads);
-    }
-
-    public void addLocation(String[] locations, Road[][] roads) {
-        for (int i = 0; i < locations.length; i++) {
-            // adding the location to the tree
-            locationTree.insert(locations[i]);
-
-            // adding the location and roads to the adjacency list
-            // creating a tempory list
-            List<Road> connectionList = new LinkedList<>();
-            for (Road road : roads[i]) {
-                connectionList.add(road);
-            }
-            adjacencyList.put(locations[i], connectionList);
-        }
-    }
-
-
-    // console >>> location input kara
-    public static void addLocation(String location) {
+    // this method is solid for now - its working
+    public static int addLocation(String location) {
+        // checking the existence and then adding
         if (locationTree.search(location) == null && !(adjacencyList.containsKey(location))) {
             locationTree.insert(location);
             adjacencyList.put(location, new LinkedList<>());
+            return 1;
         }
         else {
-            System.out.println("\t\tLocation does exist!");
+            return 0;
         }
     }
 
 
+    // fix this later 
     public void removeLocation(String location) {
         // remove from tree
         locationTree.delete(location);
@@ -60,10 +43,11 @@ public class LocationManager {
                 }
             }
         } else {
-            System.out.println(String.format("Vertex %s not exists.", location));
+            // System.out.println(String.format("Vertex %s not exists.", location));
         }
     }
 
+    // fix this later too
     public void removeRoad(String location1, String location2) {
         if (adjacencyList.containsKey(location1) && adjacencyList.containsKey(location2)) {
             if (adjacencyList.get(location1).contains(location2)) {
@@ -73,10 +57,11 @@ public class LocationManager {
                 adjacencyList.get(location2).remove(location1);
             }
         } else {
-            System.out.println("Vertex is not exist");
+            // System.out.println("Vertex is not exist");
         }
     }
 
+    // this shoud return the list of infomation not display -- fix it later
     public static void display() {
         System.out.println("");
         System.out.println("Locations And Roads");

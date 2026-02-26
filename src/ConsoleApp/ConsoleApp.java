@@ -1,6 +1,6 @@
 package ConsoleApp;
 import java.util.Scanner;
-import Module1.Module1Manager;
+import Module1.Module1Console;
 import Module2.Module2Manager;
 import Module3.Module3Manager;
 
@@ -25,7 +25,7 @@ public class ConsoleApp {
                     
                     switch (choice) { 
                         case 1: 
-                            new Module1Manager();
+                            new Module1Console();
                             break; 
                         case 2: 
                             new Module2Manager();
