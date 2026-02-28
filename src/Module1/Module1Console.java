@@ -61,11 +61,11 @@ public class Module1Console{
                     break; 
 
                 case 6: 
-                    System.out.println("\tExiting Module. Goodbye!"); 
+                    System.out.println("\n\tExiting Module. Goodbye!"); 
                     return; 
 
                 default: 
-                    System.out.println(RED + "\tInvalid Choice. Please Try Again." + RESET); 
+                    System.out.println(RED + "\n\tInvalid Choice. Please Try Again." + RESET); 
             
             }
         }
@@ -81,7 +81,7 @@ public class Module1Console{
             try {
                 // inputting the location: 
                 System.out.print("\tLocation Name: ");
-                String locationName = scan.next();
+                String locationName = scan.next().trim();
                 
                 // consuming the \n
                 scan.nextLine();
@@ -92,7 +92,7 @@ public class Module1Console{
                 // if location manager returned 0, it means it did do the task (location is already in the tree and adj.list)
                 // simply ignore the rest of the process and re start the location adding process wit new location
                 if (LocationManager.addLocation(locationName) == 0) {
-                    System.out.println(RED + "\t\tLocation Does Exist. Try Another!" + RESET);
+                    System.out.println(RED + "\n\tLocation Does Exist. Try Another!\n" + RESET);
                     continue;
                 }
                 else {
@@ -104,7 +104,7 @@ public class Module1Console{
                     
             } catch (Exception e) {
                 // if the process encounts a error during the runtime, this catch block will ignore the problem and re-try with a new location adding process
-                System.out.println(String.format(RED +"\t\tSomething Happened! (%s Locations Were Added)" + RESET, addedLocationCount));
+                System.out.println(String.format(RED +"\n\tSomething Happened! (%s Locations Were Added)\n" + RESET, addedLocationCount));
                 continue;
             }
         }
@@ -121,14 +121,14 @@ public class Module1Console{
         while (true) {
             try {
                 System.out.print("\tLocation Name: ");
-                String locationName = scan.next();
+                String locationName = scan.next().trim();
                 scan.nextLine();
 
                 if (locationName.toUpperCase().equals("DN")) 
                     break;
 
                 if (LocationManager.removeLocation(locationName) == 0) {
-                    System.out.println(RED + "\t\tLocation Does Not Exist. Try Another!" + RESET);
+                    System.out.println(RED + "\n\tLocation Does Not Exist. Try Another!\n" + RESET);
                     continue;
                 }
                 else {
@@ -138,7 +138,7 @@ public class Module1Console{
 
                     
             } catch (Exception e) {
-                System.out.println(String.format(RED + "\t\tSomething Happened! (%s Locations Were Deleted)" + RESET, removedLocationCount));
+                System.out.println(String.format(RED + "\n\tSomething Happened! (%s Locations Were Deleted)\n" + RESET, removedLocationCount));
                 scan.nextLine();
                 continue;
             }
@@ -149,7 +149,7 @@ public class Module1Console{
 
 
     public void addRoad(Scanner scan) {
-        System.out.println(YELLOW + "\n\tAdding Roads (Press 'dn' to quit)");
+        System.out.println(YELLOW + "\n\tAdding Roads (Press 'dn' / to quit)");
         System.out.println(RESET);
 
         // while --> try catch
@@ -158,28 +158,33 @@ public class Module1Console{
             try {
                 // asking the source location
                 System.out.print("\tSource Location: ");
-                String sourceLocation = scan.next();
+                String sourceLocation = scan.next().trim();
                 scan.nextLine();
                 if (sourceLocation.toUpperCase().equals("DN")) break;
                 
                 // asking the destination
                 System.out.print("\tDestination location: ");
-                String destinationLocation = scan.next();
+                String destinationLocation = scan.next().trim();
                 scan.nextLine();
                 if (destinationLocation.toUpperCase().equals("DN")) break;
-
+                
                 // asking the distance 
                 System.out.print("\tdistance: ");
-                int distance = scan.nextInt();
+                String distance = scan.nextLine().trim();
+                int distanceInt = 0;
                 scan.nextLine();
-                if (distance == -1) break;
+                if (distance.toUpperCase().equals("DN")) {
+                    break;
+                } else {
+                    distanceInt = Integer.parseInt(distance);
+                }
                 
-                LocationManager.addRoad(sourceLocation, destinationLocation, distance);
+                LocationManager.addRoad(sourceLocation, destinationLocation, distanceInt);
                 addedRoadCount ++;
                 System.out.println(); // putting space after each set of road insertions
                 
             } catch (Exception e) {
-                System.out.println(String.format(RED + "\t\tSomething Happened! (%s Roads Were Added)" + RESET, addedRoadCount));
+                System.out.println(String.format(RED + "\n\tSomething Happened! (%s Roads Were Added)\n" + RESET, addedRoadCount));
                 scan.nextLine();
                 continue;
             }
@@ -199,17 +204,17 @@ public class Module1Console{
         while (true) {
             try {
                 System.out.print("\tSource Location Name: ");
-                String sourceLocationName = scan.next();
+                String sourceLocationName = scan.next().trim();
                 scan.nextLine();
                 if (sourceLocationName.toUpperCase().equals("DN")) break;
 
                 System.out.print("\tDestination Location Name: ");
-                String destinationLocationName = scan.next();
+                String destinationLocationName = scan.next().trim();
                 scan.nextLine();
                 if (destinationLocationName.toUpperCase().equals("DN")) break;
                 
                 if (LocationManager.removeRoad(sourceLocationName,destinationLocationName) == 0) {
-                    System.out.println(RED + "\t\tLocation Does Not Exist. Try Another!" + RESET);
+                    System.out.println(RED + "\n\tLocation Does Not Exist. Try Another!\n" + RESET);
                     continue;
                 }
                 else {
@@ -218,7 +223,7 @@ public class Module1Console{
                 }
 
             } catch (Exception e) {
-                System.out.println(String.format(RED + "\t\tSomething Happened! (%s Roads Were Deleted)" + RESET, removedRoadsCount));
+                System.out.println(String.format(RED + "\n\tSomething Happened! (%s Roads Were Deleted)\n" + RESET, removedRoadsCount));
                 scan.nextLine();
                 continue;
             }

@@ -46,7 +46,7 @@ public class ConsoleApp {
                         new Module3Manager();
                         break; 
                     case 4: 
-                        System.out.println("\tExiting From The Application. Goodbye!"); 
+                        System.out.println("\n\tExiting From The Application. Goodbye!"); 
                         sc.close();
                         return; 
                     default: 
@@ -54,7 +54,7 @@ public class ConsoleApp {
                 } 
                 
             } catch (Exception e) {
-                System.out.println(RED + "\tInvalid User Input" + RESET);
+                System.out.println(RED + "\n\tInvalid User Input" + RESET);
                 sc.nextLine(); // removing hte invalid input characters
             }   
         }
