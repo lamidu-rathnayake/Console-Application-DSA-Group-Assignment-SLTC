@@ -11,13 +11,13 @@ public class LocationManager {
 
     public static int addLocation(String location) {
         // checking the existence and then adding
-        // program will insert the location to both adjacency list and location tree if the location does not exist in those places
+        // program will insert the location to both adjacency list and location tree if
+        // the location does not exist in those places
         if (locationTree.search(location) == null && !(adjacencyList.containsKey(location))) {
             locationTree.insert(location);
             adjacencyList.put(location, new LinkedList<>());
             return 1; // returning 1 if the location was added
-        }
-        else {
+        } else {
             return 0; // returning 0 if the location was not added (location alreday does exist)
         }
     }
@@ -29,7 +29,7 @@ public class LocationManager {
             adjacencyList.remove(location);
             // removeing each edges those were connect with removing vertex
             for (Map.Entry<String, List<Road>> vertex : adjacencyList.entrySet()) {
-                vertex.getValue().removeIf( road -> road.destination.equals(location));
+                vertex.getValue().removeIf(road -> road.destination.equals(location));
             }
             // removed
             return 1;
@@ -44,8 +44,7 @@ public class LocationManager {
             adjacencyList.get(location1).add(new Road(location1, distance, location2));
             adjacencyList.get(location2).add(new Road(location2, distance, location1));
             return 1;
-        }
-        else {
+        } else {
             return 0;
         }
 
@@ -65,13 +64,13 @@ public class LocationManager {
         System.out.println("\n\tAdjacency List:");
         System.out.println("\t------------------------------------------------");
         for (Map.Entry<String, List<Road>> entry : adjacencyList.entrySet()) {
-            System.out.println("\n\t\tLocation: "+entry.getKey());
+            System.out.println("\n\t\tLocation: " + entry.getKey());
             for (Road road : entry.getValue()) {
                 System.out.println("\t\t\t S:" + road.source + " D:" + road.destination + " Dest:" + road.distance);
             }
         }
     }
-    
+
     public static void traversal() {
         locationTree.bft();
     }

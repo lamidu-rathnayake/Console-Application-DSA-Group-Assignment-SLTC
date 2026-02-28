@@ -31,7 +31,7 @@ class LocationTree {
     private Location rightRotate(Location location) {
         Location leftChild = location.left;
         Location temp = leftChild.right;
-         
+
         // Perform rotation
         leftChild.right = location;
         location.left = temp;
@@ -60,14 +60,14 @@ class LocationTree {
         // Return new rootLocation
         return rightChild;
     }
-    
+
     // Get balance factor of Location
     private int getBalance(Location location) {
         if (location == null)
             return 0;
         return height(location.left) - height(location.right);
     }
-    
+
     private Location rebalance(Location rootLocation) {
         // Update height of the current node
         rootLocation.height = 1 + Math.max(height(rootLocation.left), height(rootLocation.right));
@@ -100,52 +100,59 @@ class LocationTree {
         return rootLocation;
     }
 
-    
     // adding a new location to the location tree
-    // we use this method as a wraper to the below insertHelper method to insert the root location of the tree
-    // that allows the program to perform the recursion 
+    // we use this method as a wraper to the below insertHelper method to insert the
+    // root location of the tree
+    // that allows the program to perform the recursion
     public void insert(String location) {
-        // insert to the new location to the toot tree direcly 
-        // finally assigning the resulting tree to the root tree to refresh with all the new updates
+        // insert to the new location to the toot tree direcly
+        // finally assigning the resulting tree to the root tree to refresh with all the
+        // new updates
         this.rootLocation = insertHelper(this.rootLocation, location);
     }
+
     Location insertHelper(Location rootLocation, String location) {
         // returning the new location to the previous recursive call's rootLocation
         if (rootLocation == null)
             return new Location(location);
 
-        // other wise the program will compare all the encounting nodes with the incoming location name 
-        // it travers to the end of the tree according to the comparison 
-        if (rootLocation.name.compareTo(location) > 0) 
+        // other wise the program will compare all the encounting nodes with the
+        // incoming location name
+        // it travers to the end of the tree according to the comparison
+        if (rootLocation.name.compareTo(location) > 0)
             rootLocation.left = insertHelper(rootLocation.left, location);
         else if (location.compareTo(rootLocation.name) > 0)
             rootLocation.right = insertHelper(rootLocation.right, location);
         else
-            // fires if the location is already exist and simply returns the same location node to the perent
+            // fires if the location is already exist and simply returns the same location
+            // node to the perent
             return rootLocation;
 
         // simply pass the current root location
-        // then returns the rebalanced tree to the main 
+        // then returns the rebalanced tree to the main
         return rebalance(rootLocation);
 
     }
 
     // removing location from the tree
-    // because we have to give the root as default 
+    // because we have to give the root as default
     public Location delete(String location) {
         this.rootLocation = deleteHelper(this.rootLocation, location);
         return this.rootLocation;
     }
+
     Location deleteHelper(Location rootLocation, String location) {
         if (rootLocation == null)
             return rootLocation;
 
-        // If the key to be deleted is smaller than the rootLocation's key, then it lies in left subtree
-        if (rootLocation.name.compareTo(location) > 0) 
+        // If the key to be deleted is smaller than the rootLocation's key, then it lies
+        // in left subtree
+        if (rootLocation.name.compareTo(location) > 0)
             rootLocation.left = deleteHelper(rootLocation.left, location);
 
-        // If the key to be deleted is greater than the rootLocation's key, then it lies in right subtree
-        else if (location.compareTo(rootLocation.name) > 0) 
+        // If the key to be deleted is greater than the rootLocation's key, then it lies
+        // in right subtree
+        else if (location.compareTo(rootLocation.name) > 0)
             rootLocation.right = deleteHelper(rootLocation.right, location);
 
         // if key is same as rootLocation's key, then this is the node to be deleted
@@ -156,7 +163,8 @@ class LocationTree {
                 return temp;
 
             } else {
-                // node with two children: Get the inorder successor (smallest in the right subtree)
+                // node with two children: Get the inorder successor (smallest in the right
+                // subtree)
                 Location successor = min(rootLocation.right);
 
                 // Copy the inorder successor's data to this node
@@ -172,9 +180,10 @@ class LocationTree {
     }
 
     // searching methods
-    public Location search(String location){
-        return searchHelper(this.rootLocation,location);
+    public Location search(String location) {
+        return searchHelper(this.rootLocation, location);
     }
+
     public Location searchHelper(Location rootLocation, String location) {
         if (rootLocation == null || rootLocation.name.equals(location)) {
             return rootLocation;
@@ -189,6 +198,6 @@ class LocationTree {
 
     // breath first traversal using queue
     public void bft() {
-        
+
     }
 }
