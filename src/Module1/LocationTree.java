@@ -198,6 +198,6 @@ class LocationTree {
 
     // breath first traversal using queue
     public void bft() {
-
+        
     }
 }
