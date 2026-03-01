@@ -8,6 +8,6 @@ class Location {
 
     Location(String name) {
         this.name = name;
-        this.height = 1;
+        this.height = 0;
     }
 }
