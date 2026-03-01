@@ -9,60 +9,63 @@ public class Module1Console {
     boolean freshLoad = true;
 
     public Module1Console(Scanner scan) {
-
-        System.out
-                .println(Cl.YELLOW + "\n-------------------- Smart City Route Planner --------------------" + Cl.RESET);
-
-        while (true) {
-
-            if (freshLoad) {
-                System.out.println("\n\t1. Add Location ");
-                freshLoad = false;
-            } else {
+        try {
+            System.out.println(Cl.YELLOW + "\n-------------------- Smart City Route Planner --------------------" + Cl.RESET);
+    
+            while (true) {
+    
+                if (freshLoad) {
+                    System.out.println("\n\t1. Add Location ");
+                    freshLoad = false;
+                } else {
+                    System.out.println(Cl.YELLOW + "\n\t-----------------------------------------------");
+                    System.out.println(Cl.YELLOW + "\n\tMore Operations");
+                    System.out.println(Cl.RESET);
+                    System.out.println("\t1. Add Location ");
+                }
+                System.out.println("\t2. Remove Location ");
+                System.out.println("\t3. Add Road ");
+                System.out.println("\t4. Remove Road ");
+                System.out.println("\t5. Traversal ");
+                System.out.println("\t6. Exit \n");
+                System.out.print(Cl.YELLOW + "\tChoose A Operation: " + Cl.RESET);
+                int choice = scan.nextInt();
+                scan.nextLine();
                 System.out.println(Cl.YELLOW + "\n\t-----------------------------------------------");
-                System.out.println(Cl.YELLOW + "\n\tMore Operations");
-                System.out.println(Cl.RESET);
-                System.out.println("\t1. Add Location ");
+    
+                switch (choice) {
+                    case 1:
+                        addLocation(scan);
+                        break;
+    
+                    case 2:
+                        removeLocation(scan);
+                        break;
+    
+                    case 3:
+                        addRoad(scan);
+                        break;
+    
+                    case 4:
+                        removeRoad(scan);
+                        break;
+    
+                    case 5:
+                        traversal(scan);
+                        break;
+    
+                    case 6:
+                        System.out.println("\n\tExiting Module. Goodbye!");
+                        return;
+    
+                    default:
+                        System.out.println(Cl.RED + "\n\tInvalid Choice. Please Try Again." + Cl.RESET);
+    
+                }
             }
-            System.out.println("\t2. Remove Location ");
-            System.out.println("\t3. Add Road ");
-            System.out.println("\t4. Remove Road ");
-            System.out.println("\t5. Traversal ");
-            System.out.println("\t6. Exit \n");
-            System.out.print(Cl.YELLOW + "\tChoose A Operation: " + Cl.RESET);
-            int choice = scan.nextInt();
-            scan.nextLine();
-            System.out.println(Cl.YELLOW + "\n\t-----------------------------------------------");
-
-            switch (choice) {
-                case 1:
-                    addLocation(scan);
-                    break;
-
-                case 2:
-                    removeLocation(scan);
-                    break;
-
-                case 3:
-                    addRoad(scan);
-                    break;
-
-                case 4:
-                    removeRoad(scan);
-                    break;
-
-                case 5:
-                    traversal(scan);
-                    break;
-
-                case 6:
-                    System.out.println("\n\tExiting Module. Goodbye!");
-                    return;
-
-                default:
-                    System.out.println(Cl.RED + "\n\tInvalid Choice. Please Try Again." + Cl.RESET);
-
-            }
+        } catch (Exception e) {
+            System.out.println(Cl.RED + "\n\tInvalid User Input" + Cl.RESET);
+            scan.nextLine(); // removing hte invalid input characters
         }
     }
 
@@ -252,11 +255,11 @@ public class Module1Console {
         System.out.print("\tEnter the Starting Location: ");
         String startLocation = scan.next().trim();
         ArrayList<String> traveledLocations = LocationManager.traversal(startLocation);
-        
+
         // printing all the traveled location
-        System.out.print(Cl.GREEN +"\n\tTraversal:  ");
+        System.out.print(Cl.GREEN + "\n\tTraversal:  ");
         for (String location : traveledLocations) {
-            System.out.print(String.format(" -> %s",location));
+            System.out.print(String.format(" -> %s", location));
         }
         System.out.println(Cl.RESET);
     }
