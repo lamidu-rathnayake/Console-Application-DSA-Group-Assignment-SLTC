@@ -1,5 +1,6 @@
 package Module1;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 import Style.Cl;
 
@@ -26,7 +27,7 @@ public class Module1Console {
             System.out.println("\t2. Remove Location ");
             System.out.println("\t3. Add Road ");
             System.out.println("\t4. Remove Road ");
-            System.out.println("\t5. Find Best Route ");
+            System.out.println("\t5. Traversal ");
             System.out.println("\t6. Exit \n");
             System.out.print(Cl.YELLOW + "\tChoose A Operation: " + Cl.RESET);
             int choice = scan.nextInt();
@@ -51,7 +52,7 @@ public class Module1Console {
                     break;
 
                 case 5:
-                    traversal();
+                    traversal(scan);
                     break;
 
                 case 6:
@@ -246,10 +247,18 @@ public class Module1Console {
         System.out.println(String.format(Cl.GREEN + "\n\t%s Roads Were deleted" + Cl.RESET, removedRoadsCount));
     }
 
-    public void traversal() {
-        System.out.println("\n\t Traveling through the map");
-        LocationManager.traversal();
-        System.out.println();
+    public void traversal(Scanner scan) {
+        System.out.println(Cl.YELLOW + "\n\tTraveling through the map\n" + Cl.RESET);
+        System.out.print("\tEnter the Starting Location: ");
+        String startLocation = scan.next().trim();
+        ArrayList<String> traveledLocations = LocationManager.traversal(startLocation);
+        
+        // printing all the traveled location
+        System.out.print(Cl.GREEN +"\n\tTraversal:  ");
+        for (String location : traveledLocations) {
+            System.out.print(String.format(" -> %s",location));
+        }
+        System.out.println(Cl.RESET);
     }
 
 }
