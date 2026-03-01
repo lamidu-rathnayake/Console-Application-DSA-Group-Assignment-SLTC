@@ -1,9 +1,11 @@
 package Module1;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Queue;
 
 public class LocationManager {
     public static HashMap<String, List<Road>> adjacencyList = new HashMap<>();
@@ -61,8 +63,8 @@ public class LocationManager {
     }
 
     public static void printAdjacencyList() {
-        System.out.println("\n\tAdjacency List:");
-        System.out.println("\t------------------------------------------------");
+        System.out.println("\n\t\tAdjacency List:");
+        System.out.println("\t\t---------------------------------");
         for (Map.Entry<String, List<Road>> entry : adjacencyList.entrySet()) {
             System.out.println("\n\t\tLocation: " + entry.getKey());
             for (Road road : entry.getValue()) {
@@ -71,7 +73,32 @@ public class LocationManager {
         }
     }
 
-    public static void traversal() {
-        locationTree.bft();
+    public static ArrayList<String> traversal(String locationName) {
+        if (! adjacencyList.containsKey(locationName)) {
+            return null;
+        }
+
+        Location location = locationTree.search(locationName);
+        Queue<Location> visitQueue = new LinkedList<Location>();
+        ArrayList<Location> visitedLocation = new ArrayList<Location>();
+
+        visitQueue.add(location);
+        visitedLocation.add(location);
+        ArrayList<String> traveledSequence = new ArrayList<>(adjacencyList.size());
+
+        while (!visitQueue.isEmpty()) {
+            Location currentLocation = visitQueue.poll();
+            traveledSequence.add(currentLocation.name);
+
+            for (Road road : adjacencyList.get(currentLocation.name)) {
+                Location neigbor = locationTree.search(road.destination);
+                if (! visitedLocation.contains(neigbor)) {
+                    visitedLocation.add(neigbor);
+                    visitQueue.add(neigbor);
+                }
+            }
+        }
+
+        return traveledSequence;
     }
 }

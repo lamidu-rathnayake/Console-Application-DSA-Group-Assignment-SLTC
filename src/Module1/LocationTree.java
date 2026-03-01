@@ -196,8 +196,4 @@ class LocationTree {
         return searchHelper(rootLocation.right, location);
     }
 
-    // breath first traversal using queue
-    public void bft() {
-        
-    }
 }
