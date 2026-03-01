@@ -3,7 +3,7 @@ package ConsoleApp;
 import java.util.Scanner;
 import Module1.Module1Console;
 import Module2.Module2Console;
-import Module3.Module3Manager;
+import Module3.Module3Console;
 import Style.Cl;
 
 public class ConsoleApp {
@@ -36,7 +36,7 @@ public class ConsoleApp {
                         new Module2Console(scan);
                         break;
                     case 3:
-                        new Module3Manager();
+                        new Module3Console(scan);
                         break;
                     case 4:
                         System.out.println("\n\tExiting From The Application. Goodbye!");
