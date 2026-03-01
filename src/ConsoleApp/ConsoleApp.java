@@ -33,7 +33,7 @@ public class ConsoleApp {
                         new Module1Console(scan);
                         break;
                     case 2:
-                        new Module2Manager();
+                        new Module2Console(scan);
                         break;
                     case 3:
                         new Module3Manager();
