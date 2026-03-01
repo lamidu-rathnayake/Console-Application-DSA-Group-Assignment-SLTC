@@ -2,7 +2,7 @@ package ConsoleApp;
 
 import java.util.Scanner;
 import Module1.Module1Console;
-import Module2.Module2Manager;
+import Module2.Module2Console;
 import Module3.Module3Manager;
 import Style.Cl;
 
